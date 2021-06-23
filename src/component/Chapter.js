@@ -46,7 +46,7 @@ export default function Chapter(){
     }, [chapter,title])
 
     useEffect(()=>{
-        getChapter.map((res, key)=>{
+        getChapter.forEach((res, key)=>{
             if(res.chapter_endpoint === detail.chapter_endpoint){
                  endpoint_chapter= key
                  if (endpoint_chapter !==0){
@@ -63,7 +63,8 @@ export default function Chapter(){
             if(previous === key || next === key){
                 return res
             }
-        }).map(res =>{
+            return false
+        }).forEach(res =>{
             resultButton.push(res)
         })
         setButtonChapter(resultButton)
@@ -75,7 +76,7 @@ export default function Chapter(){
     }
 
     const previousChapter = ()=>{
-       buttonChapter.map((res,key)=>{
+       buttonChapter.forEach((res,key)=>{
             if(key===1){
                 history.push(`/chapter/${title}/${res.chapter_endpoint}`)
             }
@@ -83,7 +84,7 @@ export default function Chapter(){
     }
 
     const nextChapter = ()=>{
-        buttonChapter.map((res,key)=>{
+        buttonChapter.forEach((res,key)=>{
             if(key===0){
                 history.push(`/chapter/${title}/${res.chapter_endpoint}`)
             }
