@@ -46,12 +46,12 @@ export default function Chapter(){
 
     useEffect(()=>{
         getChapter.map((res, key)=>{
-            if(res.chapter_endpoint == detail.chapter_endpoint){
+            if(res.chapter_endpoint === detail.chapter_endpoint){
                  endpoint_chapter= key
-                 if (endpoint_chapter !=0){
+                 if (endpoint_chapter !==0){
                      previous = endpoint_chapter -1
                      next = endpoint_chapter + 1
-                 }else if(endpoint_chapter == 0){
+                 }else if(endpoint_chapter === 0){
                     previous = endpoint_chapter
                     next = endpoint_chapter + 1
                  }
@@ -59,7 +59,7 @@ export default function Chapter(){
         })
 
         getChapter.filter((res,key)=>{
-            if(previous == key || next == key){
+            if(previous === key || next === key){
                 return res
             }
         }).map(res =>{
@@ -75,7 +75,7 @@ export default function Chapter(){
 
     const previousChapter = ()=>{
        buttonChapter.map((res,key)=>{
-            if(key==1){
+            if(key===1){
                 history.push(`/chapter/${title}/${res.chapter_endpoint}`)
             }
        })
@@ -83,7 +83,7 @@ export default function Chapter(){
 
     const nextChapter = ()=>{
         buttonChapter.map((res,key)=>{
-            if(key==0){
+            if(key===0){
                 history.push(`/chapter/${title}/${res.chapter_endpoint}`)
             }
        })
