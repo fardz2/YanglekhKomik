@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState,useEffect} from "react"
 import { Link } from "react-router-dom"
+import Loading from "./Loading"
 
 export default function Details(){
     const [detail, setDetail] = useState([])
@@ -33,7 +34,7 @@ export default function Details(){
         <div>
              {
                 loading
-                ?<h1>loading</h1>
+                ?<Loading/>
                 : <div className="d-flex flex-column">
                 <div className="d-flex flex-fill justify-content-center"> 
                     <img src={detail.thumb} alt="" className="img-fluid"/>

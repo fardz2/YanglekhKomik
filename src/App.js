@@ -3,6 +3,7 @@ import MyNav from './component/MyNav';
 import Home from './page/Home';
 import Chapter from './component/Chapter';
 import NewsDetail from './component/NewsDetail';
+import Loading from './component/Loading';
 // import About from './About';
 import Details from './component/Details';
 import {

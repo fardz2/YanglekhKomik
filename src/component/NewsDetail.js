@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link ,useParams, useHistory} from 'react-router-dom';
 import { Row , Col, Button} from 'react-bootstrap';
 import MyCard from './MyCard';
+import Loading from './Loading';
 
 
 export default function NewsDetail(){
@@ -46,36 +47,36 @@ export default function NewsDetail(){
        <div>
            {
                loading
-               ?<h2>Loading</h2>
+               ?<Loading/>
                :
                <>
-               <div>
-                    <h2>Update Terbaru</h2>
-    
-               </div>
-               
-                <Row className="justify-content-center align-items-center flex-fill">
-                    {
-                        detail.map((res, key)=>(
-                            <Col sm={6} md lg={3}  key={key} >
-                                 <Link to={`/${res.type}/${res.endpoint}`}>
-                                    <MyCard res={res}/>
-                                </Link>
-                               
-                            </Col>
-                        ))
-                    }
-                  
-                </Row>
-                <div className="d-flex justify-content-center align-items-center">
-                    {
-                        getPage > 1?
-                            <Button onClick={previousPage}>Sebelumnya</Button>
-                        :""
-                    }
-    
-                    <Button onClick={nextPage}>Selanjutnya</Button>
+                <div>
+                        <h2>Update Terbaru</h2>
+        
                 </div>
+                
+                    <Row className="justify-content-center align-items-center flex-fill">
+                        {
+                            detail.map((res, key)=>(
+                                <Col sm={6} md lg={3}  key={key} >
+                                    <Link to={`/${res.type}/${res.endpoint}`}>
+                                        <MyCard res={res}/>
+                                    </Link>
+                                
+                                </Col>
+                            ))
+                        }
+                    
+                    </Row>
+                    <div className="d-flex justify-content-center align-items-center">
+                        {
+                            getPage > 1?
+                                <Button onClick={previousPage}>Sebelumnya</Button>
+                            :""
+                        }
+        
+                        <Button onClick={nextPage}>Selanjutnya</Button>
+                    </div>
                 </>
            }
     

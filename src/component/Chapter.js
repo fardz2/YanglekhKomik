@@ -4,6 +4,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useHistory, useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import MediaQuery from "react-responsive";
+import Loading from "./Loading";
 
 
 
@@ -103,7 +104,7 @@ export default function Chapter(){
                 loading
                 ?
                 <Container style={{paddingTop:"100px"}}>
-                    <h1>loading</h1>
+                    <Loading/>
                 </Container>
                
                 :
@@ -119,7 +120,7 @@ export default function Chapter(){
                                     }
                             </select>
                         </div>
-                        <div>
+                        <div className="d-flex justify-content-between">
                         
                             <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
                             <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
@@ -176,7 +177,7 @@ export default function Chapter(){
                                     }
                             </select>
                         </div>
-                        <div>
+                        <div className="d-flex justify-content-between">
                         
                             <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
                             <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>

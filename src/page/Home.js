@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useEffect } from "react"
 import HotKomik from "../component/Hotkomik"
 import News from "../component/News"
+import Loading from "../component/Loading"
+
 
 
 export default function Home(){
@@ -34,7 +36,9 @@ export default function Home(){
         <>
         {
             loading?
-            <h1>loading</h1>
+            
+            <Loading/>
+           
             :
             <>
             {
@@ -43,7 +47,7 @@ export default function Home(){
                 :<h1>Maaf manga populer tidak ditemukan, terjadi down server</h1>
             }
            
-            <News updateManga={news}/>
+                <News updateManga={news}/>
             </>
         }
        
