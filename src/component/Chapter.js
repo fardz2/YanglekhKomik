@@ -11,9 +11,15 @@ import MediaQuery from "react-responsive";
 export default function Chapter(){
     const [detail, setDetail] = useState([])
     const [getChapter, setChapter] = useState([])
+    const [buttonChapter,setButtonChapter] = useState([])
     const [loading, setLoading] = useState(false)
     const{chapter ,title} = useParams()
     let history = useHistory()
+    let endpoint_chapter
+    let previous
+    let next
+    let resultButton = []
+    
 
     useEffect(() => {
         const apiGet = async ()=>{
@@ -38,14 +44,52 @@ export default function Chapter(){
         apiGet()
     }, [chapter,title])
 
-   
+    useEffect(()=>{
+        getChapter.map((res, key)=>{
+            if(res.chapter_endpoint == detail.chapter_endpoint){
+                 endpoint_chapter= key
+                 if (endpoint_chapter !=0){
+                     previous = endpoint_chapter -1
+                     next = endpoint_chapter + 1
+                 }else if(endpoint_chapter == 0){
+                    previous = endpoint_chapter
+                    next = endpoint_chapter + 1
+                 }
+            }
+        })
+
+        getChapter.filter((res,key)=>{
+            if(previous == key || next == key){
+                return res
+            }
+        }).map(res =>{
+            resultButton.push(res)
+        })
+        setButtonChapter(resultButton)
+    },[getChapter])
 
     
-   const changeChapter = (e)=>{
+    const changeChapter = (e)=>{
         history.push(`/chapter/${title}/${e.target.value}`);
-   }
+    }
 
- 
+    const previousChapter = ()=>{
+       buttonChapter.map((res,key)=>{
+            if(key==1){
+                history.push(`/chapter/${title}/${res.chapter_endpoint}`)
+            }
+       })
+    }
+
+    const nextChapter = ()=>{
+        buttonChapter.map((res,key)=>{
+            if(key==0){
+                history.push(`/chapter/${title}/${res.chapter_endpoint}`)
+            }
+       })
+    }
+
+   
    
      
        
@@ -76,8 +120,9 @@ export default function Chapter(){
                             </select>
                         </div>
                         <div>
-                            <button className="btn btn-primary mr-1">Kembali</button>
-                            <button className="btn btn-primary">Selanjutnya</button>
+                        
+                            <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
+                            <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
                         </div>
                     </Container>
                   
@@ -121,26 +166,22 @@ export default function Chapter(){
                             </div>
                         
                     </MediaQuery> 
-                    <div className="d-flex justify-content-between my-3">
+                    <Container className="d-flex justify-content-between my-3" style={{paddingTop:"100px"}} >
                         <div>
                             <select className="form-control" value={detail.chapter_endpoint} onChange={changeChapter}>
-                                {
-                                    getChapter.map((res,key)=>(
-                                        <option value={res.chapter_endpoint}>{res.chapter_title}</option>
-                                    ))
-                                }
-                                
-                            
+                                    {
+                                        getChapter.map((res,key)=>(
+                                            <option value={res.chapter_endpoint}>{res.chapter_title}</option>
+                                        ))
+                                    }
                             </select>
                         </div>
                         <div>
-                            
                         
-                        
+                            <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
+                            <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
                         </div>
-                    
-                        
-                    </div>
+                    </Container>
                 </>
                 
             }
