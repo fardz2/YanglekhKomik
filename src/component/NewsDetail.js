@@ -18,9 +18,11 @@ export default function NewsDetail(){
                 setLoading(true)
                 const get = await fetch(`https://mangamint.kaedenoki.net/api/manga/page/${getPage}`)
                 const response = await get.json()
-                
-                setDetail(response.manga_list)
-                setLoading(false)
+                setTimeout(()=>{
+                    setDetail(response.manga_list)
+                    setLoading(false)
+                },500)
+               
                 
                
             } catch (error) {
@@ -59,7 +61,7 @@ export default function NewsDetail(){
                         {
                             detail.map((res, key)=>(
                                 <Col sm={6} md lg={3}  key={key} >
-                                    <Link to={`/${res.type}/${res.endpoint}`}>
+                                    <Link to={`/detail/${res.type}/${res.endpoint}`}>
                                         <MyCard res={res}/>
                                     </Link>
                                 
