@@ -7,7 +7,7 @@ import Loading from "../component/Loading"
 
 
 export default function Home(){
-    const [loading , setLoading] = useState(false)
+    const [loading , setLoading] = useState(true)
     const [populer , setPopuler] = useState([])
     const [news, setNews] = useState([])
    

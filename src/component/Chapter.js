@@ -13,7 +13,7 @@ export default function Chapter(){
     const [detail, setDetail] = useState([])
     const [getChapter, setChapter] = useState([])
     const [buttonChapter,setButtonChapter] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [firstChapter , setFirstChapter] = useState()
     const [endChapter , setEndChapter] = useState("")
     const{chapter ,title , type} = useParams()

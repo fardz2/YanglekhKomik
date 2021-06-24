@@ -8,12 +8,13 @@ import Loading from './Loading';
 export default function NewsDetail(){
     const {page} = useParams()
     const [detail, setDetail] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     let history = useHistory()
     let getPage = parseInt(page)
 
     useEffect(() => {
         const apiGet = async ()=>{
+            
             try {
                 setLoading(true)
                 const get = await fetch(`https://mangamint.kaedenoki.net/api/manga/page/${getPage}`)

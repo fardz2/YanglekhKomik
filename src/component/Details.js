@@ -5,7 +5,7 @@ import Loading from "./Loading"
 
 export default function Details(){
     const [detail, setDetail] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     let {title} = useParams()
     
     useEffect(() => {

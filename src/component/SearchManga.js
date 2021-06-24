@@ -8,12 +8,13 @@ import Loading from './Loading';
 export default function SearchManga(){
     const {search} = useLocation();
     const [detail, setDetail] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     const searchParams = new URLSearchParams(search)
     const q = searchParams.get("q")
 
     useEffect(() => {
         const apiGet = async ()=>{
+            
             try {
                 setLoading(true)
                 const get = await fetch(`https://mangamint.kaedenoki.net/api/search/${q}`)
