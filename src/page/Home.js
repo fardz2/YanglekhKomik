@@ -7,9 +7,10 @@ import Loading from "../component/Loading"
 
 
 export default function Home(){
+    const [loading , setLoading] = useState(false)
     const [populer , setPopuler] = useState([])
     const [news, setNews] = useState([])
-    const [loading , setLoading] = useState(false)
+   
     
     useEffect(()=>{
         const apiGet = async ()=>{
@@ -19,9 +20,12 @@ export default function Home(){
                 const get2 = await fetch("https://mangamint.kaedenoki.net/api/manga/page/1")
                 const response = await get.json()
                 const response2= await get2.json()
-                setPopuler(response.manga_list)
-                setNews(response2.manga_list)
-                setLoading(false)
+                setTimeout(()=>{
+                    setPopuler(response.manga_list)
+                    setNews(response2.manga_list)
+                    setLoading(false)
+                },500)
+               
             } catch (error) {
                 console.log(error)
             }

@@ -16,7 +16,7 @@ export default function News({updateManga}){
                 {
                     updateManga.map((res, key)=>(
                         <Col sm={6} md lg={3} >
-                            <Link to={`/${res.type}/${res.endpoint}`}>
+                            <Link to={`/detail/${res.type}/${res.endpoint}`}>
                                 <MyCard res={res}/>
                             </Link>
                            

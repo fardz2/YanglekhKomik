@@ -14,10 +14,12 @@ export default function Details(){
                 setLoading(true)
                 const get = await fetch(`https://mangamint.kaedenoki.net/api/manga/detail/${title}`)
                 const response = await get.json()
-                
-                setDetail(response)
-                setLoading(false)
-                
+                setTimeout(()=>{
+                    setDetail(response)
+                    setLoading(false)
+                    
+                },500)
+               
                
             } catch (error) {
                 console.log(error)
@@ -57,7 +59,7 @@ export default function Details(){
                     <ul class="list-group " style={{height:"400px",overflow:"auto"}}>
                         {
                             detail.chapter?.map((res,key)=>(
-                                <Link to={`/chapter/${detail.manga_endpoint}/${res.chapter_endpoint}`}>
+                                <Link to={`/detail/${detail.type}/${detail.manga_endpoint}/${res.chapter_endpoint}`}>
                                     <li class="list-group-item" key={key}>
                                         {res.chapter_title}
                                     </li>

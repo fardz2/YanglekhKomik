@@ -14,12 +14,13 @@ export default function Chapter(){
     const [getChapter, setChapter] = useState([])
     const [buttonChapter,setButtonChapter] = useState([])
     const [loading, setLoading] = useState(false)
-    const{chapter ,title} = useParams()
+    const [firstChapter , setFirstChapter] = useState()
+    const [endChapter , setEndChapter] = useState("")
+    const{chapter ,title , type} = useParams()
     let history = useHistory()
-    let endpoint_chapter
-    let previous
-    let next
-    let resultButton = []
+   
+    
+    
     
 
     useEffect(() => {
@@ -30,9 +31,12 @@ export default function Chapter(){
                 const response = await get.json()
                 const get2 = await fetch(`https://mangamint.kaedenoki.net/api/manga/detail/${title}`)
                 const response2 = await get2.json()
-                setDetail(response)
-                setChapter(response2.chapter)
-                setLoading(false)
+                setTimeout(()=>{
+                    setDetail(response)
+                    setChapter(response2.chapter)
+                    setLoading(false)
+                },500)
+                
                
                 
                
@@ -43,12 +47,25 @@ export default function Chapter(){
 
         }
         apiGet()
+       
     }, [chapter,title])
 
     useEffect(()=>{
+        let endpoint_chapter
+        let previous
+        let next
+        let resultButton = []
         getChapter.forEach((res, key)=>{
+            if(key === getChapter.length -1 ){
+                setFirstChapter(res.chapter_endpoint)
+            }
+
+            if( key === 0) {
+                setEndChapter(res.chapter_endpoint)
+            }
             if(res.chapter_endpoint === detail.chapter_endpoint){
                  endpoint_chapter= key
+                
                  if (endpoint_chapter !==0){
                      previous = endpoint_chapter -1
                      next = endpoint_chapter + 1
@@ -56,6 +73,8 @@ export default function Chapter(){
                     previous = endpoint_chapter
                     next = endpoint_chapter + 1
                  }
+
+
             }
         })
 
@@ -65,42 +84,41 @@ export default function Chapter(){
             }
             return false
         }).forEach(res =>{
-            resultButton.push(res)
+            resultButton.push(res.chapter_endpoint)
         })
         setButtonChapter(resultButton)
-    },[getChapter])
+       
+    },[getChapter,detail])
 
     
     const changeChapter = (e)=>{
-        history.push(`/chapter/${title}/${e.target.value}`);
+        history.push(`/detail/${type}/${title}/${e.target.value}`);
     }
 
     const previousChapter = ()=>{
        buttonChapter.forEach((res,key)=>{
             if(key===1){
-                history.push(`/chapter/${title}/${res.chapter_endpoint}`)
+                history.push(`/detail/${type}/${title}/${res}`)
+                
             }
        })
+      
+        
     }
 
     const nextChapter = ()=>{
         buttonChapter.forEach((res,key)=>{
             if(key===0){
-                history.push(`/chapter/${title}/${res.chapter_endpoint}`)
+                history.push(`/detail/${type}/${title}/${res}`)
+               
             }
        })
     }
 
-   
-   
-     
-       
-   
-
     return(
-        
-        <div>
-           
+       
+        <>
+             {console.log(detail)}
             {
                 loading
                 ?
@@ -122,9 +140,13 @@ export default function Chapter(){
                             </select>
                         </div>
                         <div className="d-flex justify-content-between">
-                        
-                            <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
-                            <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                            {
+                               firstChapter === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
+                            }
+    
+                            {
+                                 endChapter === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                            } 
                         </div>
                     </Container>
                   
@@ -179,16 +201,20 @@ export default function Chapter(){
                             </select>
                         </div>
                         <div className="d-flex justify-content-between">
-                        
-                            <button className="btn btn-primary mr-1" onClick={previousChapter}>Kembali</button>
-                            <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                            {
+                               firstChapter === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
+                            }
+    
+                            {
+                                 endChapter === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                            } 
                         </div>
                     </Container>
                 </>
                 
             }
            
-        </div>
+        </>
     
     )
 }

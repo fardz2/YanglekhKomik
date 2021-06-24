@@ -31,7 +31,7 @@ export default function HotKomik({populerManga}){
                     {
                         populerManga.map((res,key)=>(
                             <SwiperSlide key={key} className="mySwiper" >
-                                <Link to={`/${res.type}/${res.endpoint}`}>
+                                <Link to={`/detail/${res.type}/${res.endpoint}`}>
                                     <div className="d-flex flex-column " >
                                         <div className=" " >
                                             <img src={res.thumb} className="img-fluid" alt="terserah" />
