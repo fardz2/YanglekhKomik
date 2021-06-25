@@ -11,15 +11,15 @@ import Loading from "./Loading";
 
 
 export default function Chapter(){
+    const {pathname} = useLocation();
     const [detail, setDetail] = useState([])
     const [getChapter, setChapter] = useState([])
     const [buttonChapter,setButtonChapter] = useState([])
     const [loading, setLoading] = useState(true)
-    const [firstChapter , setFirstChapter] = useState()
+    const [firstChapter , setFirstChapter] = useState("")
     const [endChapter , setEndChapter] = useState("")
-    const{chapter ,title , type} = useParams()
+    const{chapter ,title } = useParams()
     let history = useHistory()
-    const {pathname} = useLocation()
    
     
     
@@ -65,7 +65,7 @@ export default function Chapter(){
             if( key === 0) {
                 setEndChapter(res.chapter_endpoint)
             }
-            if(res.chapter_endpoint === detail.chapter_endpoint){
+            if(decodeURIComponent(res.chapter_endpoint) === detail.chapter_endpoint){
                  endpoint_chapter= key
                 
                  if (endpoint_chapter !==0){
@@ -94,16 +94,17 @@ export default function Chapter(){
 
     
     const changeChapter = (e)=>{
-        history.push(`/detail/${type}/${title}/${e.target.value}`);
+        history.push(`/chapter/${title}/${e.target.value}`);
     }
 
     const previousChapter = ()=>{
        buttonChapter.forEach((res,key)=>{
             if(key===1){
-                history.push(`/detail/${type}/${title}/${res}`)
+                history.push(`/chapter/${title}/${decodeURIComponent(res)}`)
                 
             }
        })
+   
       
         
     }
@@ -111,7 +112,7 @@ export default function Chapter(){
     const nextChapter = ()=>{
         buttonChapter.forEach((res,key)=>{
             if(key===0){
-                history.push(`/detail/${type}/${title}/${res}`)
+                history.push(`/chapter/${title}/${decodeURIComponent(res)}`)
                
             }
        })
@@ -120,7 +121,8 @@ export default function Chapter(){
     return(
        
         <>
-             {console.log(detail)}
+             {console.log(pathname)}
+             
             {
                 loading
                 ?
@@ -136,18 +138,18 @@ export default function Chapter(){
                             <select className="form-control" value={detail.chapter_endpoint} onChange={changeChapter}>
                                     {
                                         getChapter.map((res,key)=>(
-                                            <option value={res.chapter_endpoint}>{res.chapter_title}</option>
+                                            <option value={ decodeURIComponent(res.chapter_endpoint)}>{res.chapter_title}</option>
                                         ))
                                     }
                             </select>
                         </div>
                         <div className="d-flex justify-content-between">
                             {
-                               firstChapter === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
+                               decodeURIComponent(firstChapter) === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
                             }
     
                             {
-                                 endChapter === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                                 decodeURIComponent(endChapter) === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
                             } 
                         </div>
                     </Container>

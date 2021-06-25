@@ -44,7 +44,7 @@ export default function Details(){
                 ?<Loading/>
                 : <div className="d-flex flex-column">
                 <div className="d-flex flex-fill justify-content-center"> 
-                    <img src={detail.thumb} alt="" className="img-fluid"/>
+                    <img src={decodeURIComponent(detail.thumb)} alt="" className="img-fluid"/>
                 </div>
                 <div className="flex-fill">
                     <h2>{detail.title}</h2>
@@ -64,7 +64,7 @@ export default function Details(){
                     <ul class="list-group " style={{height:"400px",overflow:"auto"}}>
                         {
                             detail.chapter?.map((res,key)=>(
-                                <Link to={`/detail/${detail.type}/${detail.manga_endpoint}/${res.chapter_endpoint}`}>
+                                <Link to={`/chapter/${detail.manga_endpoint}/${res.chapter_endpoint}`}>
                                     <li class="list-group-item" key={key}>
                                         {res.chapter_title}
                                     </li>

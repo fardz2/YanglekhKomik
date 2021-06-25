@@ -29,7 +29,7 @@ function App() {
       <MyNav/>
         <Switch>
             
-              <Route exact path="/">
+              <Route  exact path="/">
                 <Container style={{paddingTop:"100px"}}>
                     <Home />
                 </Container>
@@ -40,19 +40,21 @@ function App() {
                   <SearchManga/>
                 </Container>  
               </Route>
-              <Route exact path="/detail/:type/:title">
-                <Container style={{paddingTop:"100px"}}>
-                  <Details/>
-                </Container>
-              </Route>
-              <Route path="/detail/:type/:title/:chapter">
-                  <Chapter/>   
-              </Route>
-              <Route exact path="/daftar-komik/:page" >
+              <Route  path="/daftar-komik/:page" >
                 <Container style={{paddingTop:"100px"}}>
                   <NewsDetail/>
                 </Container>  
               </Route>
+
+              <Route  path="/detail/:type/:title">
+                <Container style={{paddingTop:"100px"}}>
+                  <Details/>
+                </Container>
+              </Route>
+              <Route path="/chapter/:title/:chapter">
+                  <Chapter/>   
+              </Route>
+             
               {/* <Route  exact path="*">
                   <Container style={{paddingTop:"100px"}}>
                     <h2>Halaman Tidak ditemukan</h2>
