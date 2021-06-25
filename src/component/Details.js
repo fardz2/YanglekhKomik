@@ -1,12 +1,17 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import { useState,useEffect} from "react"
 import { Link } from "react-router-dom"
 import Loading from "./Loading"
+import { DiscussionEmbed } from "disqus-react"
 
 export default function Details(){
+    let {title} = useParams()
     const [detail, setDetail] = useState([])
     const [loading,setLoading] = useState(true)
-    let {title} = useParams()
+    const {pathname} = useLocation()
+
+    
+    
     
     useEffect(() => {
         const apiGet = async ()=>{
@@ -69,6 +74,20 @@ export default function Details(){
                     </ul>
                  
                 </div>
+                
+                <DiscussionEmbed
+                    shortname='yanglekhkomik'
+                    config={
+                        {
+                            url : `https://yanglekhkomik.netlify.app/${pathname}`,
+                            identifier : title,
+                            title : detail.title,
+                            language: 'id'
+                            
+                        }
+                       
+                    }
+                />
 
             </div>
                 

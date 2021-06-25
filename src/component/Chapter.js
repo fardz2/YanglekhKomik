@@ -1,8 +1,9 @@
 import { useEffect, useState} from "react";
 import { LazyLoadImage  } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams ,useLocation} from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { DiscussionEmbed } from "disqus-react";
 import MediaQuery from "react-responsive";
 import Loading from "./Loading";
 
@@ -18,6 +19,7 @@ export default function Chapter(){
     const [endChapter , setEndChapter] = useState("")
     const{chapter ,title , type} = useParams()
     let history = useHistory()
+    const {pathname} = useLocation()
    
     
     
@@ -209,6 +211,22 @@ export default function Chapter(){
                                  endChapter === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
                             } 
                         </div>
+                     
+                    </Container>
+                    <Container>
+                        <DiscussionEmbed
+                                shortname='yanglekhkomik'
+                                config={
+                                    {
+                                        url : `https://yanglekhkomik.netlify.app/${pathname}`,
+                                        identifier : chapter,
+                                        title : detail.chapter_name,
+                                        language: 'id'
+                                        
+                                    }
+                                
+                                }
+                        />
                     </Container>
                 </>
                 
