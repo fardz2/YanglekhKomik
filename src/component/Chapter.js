@@ -199,21 +199,20 @@ export default function Chapter(){
                             <select className="form-control" value={detail.chapter_endpoint} onChange={changeChapter}>
                                     {
                                         getChapter.map((res,key)=>(
-                                            <option value={res.chapter_endpoint}>{res.chapter_title}</option>
+                                            <option value={ decodeURIComponent(res.chapter_endpoint)}>{res.chapter_title}</option>
                                         ))
                                     }
                             </select>
                         </div>
                         <div className="d-flex justify-content-between">
                             {
-                               firstChapter === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
+                               decodeURIComponent(firstChapter) === detail.chapter_endpoint ? "" :     <button className="btn btn-primary" onClick={previousChapter}>Sebelumya</button>
                             }
     
                             {
-                                 endChapter === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
+                                 decodeURIComponent(endChapter) === detail.chapter_endpoint ? "" :  <button className="btn btn-primary" onClick={nextChapter}>Selanjutnya</button>
                             } 
                         </div>
-                     
                     </Container>
                     <Container>
                         <DiscussionEmbed
