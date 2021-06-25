@@ -79,7 +79,7 @@ export default function Details(){
                     shortname='yanglekhkomik'
                     config={
                         {
-                            url : `https://yanglekhkomik.netlify.app/${pathname}`,
+                            url : `https://yanglekhkomik.netlify.app${pathname}`,
                             identifier : title,
                             title : detail.title,
                             language: 'id'

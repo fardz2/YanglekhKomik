@@ -218,7 +218,7 @@ export default function Chapter(){
                                 shortname='yanglekhkomik'
                                 config={
                                     {
-                                        url : `https://yanglekhkomik.netlify.app/${pathname}`,
+                                        url : `https://yanglekhkomik.netlify.app${pathname}`,
                                         identifier : chapter,
                                         title : detail.chapter_name,
                                         language: 'id'
