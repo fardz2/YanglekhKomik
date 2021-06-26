@@ -1,4 +1,4 @@
-import { Card , Button } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 
 export default function MyCard({res }){
     return(
@@ -8,10 +8,16 @@ export default function MyCard({res }){
                <Card.Body>
                    <Card.Title>{res.title}</Card.Title>
                    <Card.Text>
-                       <p>{res.updated_on} yang lalu</p>
-                       <p>{res.chapter}</p>
+                        <p>{res.type}</p>
+                       {
+                           res.updated_on ? 
+                            <div className="d-flex justify-content-between">
+                                <p>{res.chapter}</p>
+                                <p>{res.updated_on } yang lalu </p>
+                            </div> : ""
+                       }
+                           
                    </Card.Text>
-                   <Button variant="primary">Go somewhere</Button>
                </Card.Body>
            </Card>
       

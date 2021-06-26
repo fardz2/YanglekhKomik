@@ -53,6 +53,7 @@ export default function Details(){
                 <div>
                     {
                         detail.genre_list?.map((res,key)=>(
+                            
                             <button type="button" class="btn btn-secondary btn-sm mr-3" key={key}>
                                 {res.genre_name}
                             </button>

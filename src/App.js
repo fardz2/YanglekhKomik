@@ -1,11 +1,13 @@
 import React  from 'react';
 import MyNav from './component/MyNav';
 import Home from './page/Home';
+import Genre from './page/Genre';
 import Chapter from './component/Chapter';
 import NewsDetail from './component/NewsDetail';
 import Details from './component/Details';
 import PageNotFound from './component/PageNotFound';
 import SearchManga from './component/SearchManga';
+import GenreDetail from './component/GenreDetail';
 // import About from './About';
 import {
   BrowserRouter as Router,
@@ -39,6 +41,16 @@ function App() {
                 <Container style={{paddingTop:"100px"}}>
                   <SearchManga/>
                 </Container>  
+              </Route>
+              <Route exact path="/genre">
+                <Container style={{paddingTop:"100px"}}>
+                    <Genre/>
+                </Container>  
+              </Route>
+              <Route path="/genre/:genre/:page">
+                <Container style={{paddingTop:"100px"}}>
+                    <GenreDetail/>
+                </Container>
               </Route>
               <Route  path="/daftar-komik/:page" >
                 <Container style={{paddingTop:"100px"}}>

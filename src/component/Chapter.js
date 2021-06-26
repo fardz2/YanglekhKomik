@@ -28,7 +28,7 @@ export default function Chapter(){
     useEffect(() => {
         const apiGet = async ()=>{
             try {
-                setLoading(true)
+               
                 const get = await fetch(`https://mangamint.kaedenoki.net/api/chapter/${chapter}/`)
                 const response = await get.json()
                 const get2 = await fetch(`https://mangamint.kaedenoki.net/api/manga/detail/${title}`)
@@ -90,18 +90,19 @@ export default function Chapter(){
         })
         setButtonChapter(resultButton)
        
-    },[getChapter,detail])
+    },[getChapter,detail.chapter_endpoint])
 
     
     const changeChapter = (e)=>{
         history.push(`/chapter/${title}/${e.target.value}`);
+         setLoading(true)
     }
 
     const previousChapter = ()=>{
        buttonChapter.forEach((res,key)=>{
             if(key===1){
                 history.push(`/chapter/${title}/${decodeURIComponent(res)}`)
-                
+                setLoading(true)
             }
        })
    
@@ -113,7 +114,7 @@ export default function Chapter(){
         buttonChapter.forEach((res,key)=>{
             if(key===0){
                 history.push(`/chapter/${title}/${decodeURIComponent(res)}`)
-               
+                setLoading(true)
             }
        })
     }
@@ -121,13 +122,13 @@ export default function Chapter(){
     return(
        
         <>
-             {console.log(pathname)}
+             
              
             {
                 loading
                 ?
                 <Container style={{paddingTop:"100px"}}>
-                    <Loading/>
+                    <Loading />
                 </Container>
                
                 :

@@ -27,7 +27,7 @@ function MyNav(){
                                 <Link to="/">Home</Link>
                             </Nav.Link>
                             <Nav.Link href="#pricing">
-                                <Link to="/about">Genre</Link>
+                                <Link to="/genre">Genre</Link>
                             </Nav.Link>
                            
                         </Nav>
